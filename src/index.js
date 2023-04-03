@@ -1,5 +1,4 @@
 import "./styles/global-style.css";
+import AppController from "./modules/AppController";
 
-const container = document.getElementById("container");
-
-container.innerText = "Hello world!";
+AppController.getWeatherData();
