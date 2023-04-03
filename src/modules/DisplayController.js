@@ -1,13 +1,14 @@
 const DisplayController = (() => {
   const container = document.getElementById('container');
 
-  const displayWeatherData = (data) => {
-    const location = data.location.name;
-    const temp = data.current.temp_c;
-    const { humidity } = data.current;
-    const windSpeed = data.current.wind_mph;
-    const description = data.current.condition.text;
-
+  const displayWeatherData = (
+    location,
+    temp,
+    humidity,
+    windSpeed,
+    description,
+    iconURL
+  ) => {
     container.innerHTML = String.raw`
     <div>
     ${location}
@@ -17,9 +18,9 @@ const DisplayController = (() => {
             <li>Wind speed: ${windSpeed} </li>
             <li> ${description} </li>
         </ul>
+        <img id="weather-icon" src="${iconURL}" />
     </div>
     `;
-    console.log(data);
   };
 
   return { displayWeatherData };
