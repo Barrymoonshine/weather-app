@@ -1,4 +1,4 @@
-import "./styles/global-style.css";
-import AppController from "./modules/AppController";
+import './styles/global-style.css';
+import AppController from './modules/AppController';
 
-AppController.getWeatherData();
+AppController.handleWeatherRequest();

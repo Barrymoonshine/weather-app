@@ -1,5 +1,5 @@
 const DisplayController = (() => {
-  const container = document.getElementById("container");
+  const container = document.getElementById('container');
 
   const displayWeatherData = (data) => {
     const location = data.location.name;

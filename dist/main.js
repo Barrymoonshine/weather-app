@@ -8,4 +8,4 @@
             <li> ${i} </li>
         </ul>
     </div>
-    `,console.log(t)}}})();(async()=>{const e=await fetch("https://api.weatherapi.com/v1/current.json?key=5b4cd00533fe44fba2d94101233003&q=london",{mode:"cors"}),t=await e.json();m.displayWeatherData(t)})()})()})();
+    `,console.log(t)}}})();(()=>{const e=document.getElementById("search-location-form"),t=document.getElementById("site-search"),n=e=>{(async e=>{try{const t=await fetch(`https://api.weatherapi.com/v1/current.json?key=5b4cd00533fe44fba2d94101233003&q=${e}`,{mode:"cors"}),n=await t.json();m.displayWeatherData(n)}catch(e){console.log(e)}})(void 0===e?"london":e)};return e.addEventListener("submit",(e=>{const r=t.value;n(r),e.preventDefault(),t.value=""})),{handleWeatherRequest:n}})().handleWeatherRequest()})()})();
