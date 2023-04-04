@@ -4,8 +4,23 @@ const AppController = (() => {
   const searchLocationForm = document.getElementById('search-location-form');
   const searchfield = document.getElementById('site-search');
 
-  const processData = (data) => {
-    console.log(data);
+  const processGiphyData = () => {
+    const giph = giphyData.data.images.original.url;
+    DisplayController.displayGiphyData(giph);
+  };
+
+  const searchGiphy = async (userSearch) => {
+    console.log('search giphy called');
+    const response = await fetch(
+      `https://api.giphy.com/v1/gifs/translate?api_key=stGdFhymjYVkIyM0zb1okf7kudYtznl3&s=${userSearch}`,
+      { mode: 'cors' }
+    );
+    const giphURL = await response.json();
+    giphURL = giphyData.data.images.original.url;
+    processGiphyData(giphURL);
+  };
+
+  const processWeatherData = (data) => {
     const location = data.location.name;
     const temp = data.current.temp_c;
     const { humidity } = data.current;
@@ -13,7 +28,6 @@ const AppController = (() => {
     const description = data.current.condition.text;
     const { icon } = data.current.condition;
     const iconURL = `https:${icon}`;
-    console.log(iconURL);
     DisplayController.displayWeatherData(
       location,
       temp,
@@ -22,6 +36,7 @@ const AppController = (() => {
       description,
       iconURL
     );
+    searchGiphy(description);
   };
 
   const getWeatherData = async (location) => {
@@ -31,7 +46,7 @@ const AppController = (() => {
         { mode: 'cors' }
       );
       const data = await response.json();
-      processData(data);
+      processWeatherData(data);
     } catch (error) {
       console.log(error);
     }
@@ -54,3 +69,38 @@ const AppController = (() => {
 })();
 
 export default AppController;
+
+const DisplayController = (() => {
+  const weatherDataContainer = document.getElementById(
+    'weather-data-container'
+  );
+
+  const displayWeatherData = (
+    location,
+    temp,
+    humidity,
+    windSpeed,
+    description,
+    iconURL
+  ) => {
+    weatherDataContainer.innerHTML = String.raw`
+    <div class="location-title">${location} <img id="weather-icon" src="${iconURL}" /> </div>
+    <div class="temperature-box"> ${temp}<span class="unit-measure">&#8451</span></div>
+      <ul class="weather-details">
+          <li>Humidity: ${humidity} % </li>
+          <li>Wind speed: ${windSpeed} Mph </li>
+          <li> ${description} </li>
+      </ul>
+     <div class="giphy-box><img src="#" /></div> 
+    `;
+  };
+
+  const displayGiphyData = (giphURL) => {
+    const img = document.querySelector('img');
+    img.src = giphURL;
+  };
+
+  return { displayWeatherData, displayGiphyData };
+})();
+
+export default DisplayController;
