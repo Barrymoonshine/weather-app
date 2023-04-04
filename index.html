@@ -1,25 +1,44 @@
-<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Weather App</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Gupter&display=swap"
+      rel="stylesheet"
+    />
+    <title>Whatever the Weather</title>
   </head>
   <body>
-    <div id="container"></div>
-    <form id="search-location-form">
-      <label for="site-search">Search:</label>
-      <input
-        type="search"
-        id="site-search"
-        placeholder="Enter country or city name"
-      />
-      <label for="Submit form"></label>
-      <button id="submitButton" type="submit" class="form-fields">
-        Search
-      </button>
-    </form>
+    <div class="header">WhateverTheWeather</div>
+    <main>
+      <div id="container">
+        <div id="weather-data-container">
+        </div>
+        <div class="form-container">
+          <form id="search-location-form">
+            <label for="site-search"></label>
+            <input
+              type="search"
+              id="site-search"
+              placeholder="Enter a country or city name"
+            />
+            <label for="Submit form"></label>
+            <button id="submit-button" type="submit" class="form-fields">
+              Search
+            </button>
+          </form>
+        </div>
+      </div>
+    </main>
+    <div class="footer">
+      <p>
+        © Made by
+        <a href="https://github.com/Barrymoonshine">Barry Moonshine</a> for
+        <a href="https://www.theodinproject.com/">The Odin Project</a>
+      </p>
     <script src="main.js"></script>
   </body>
 </html>
