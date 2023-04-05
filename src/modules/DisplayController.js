@@ -13,7 +13,15 @@ const DisplayController = (() => {
   ) => {
     weatherDataContainer.innerHTML = String.raw`
     <div class="location-title">${location} <img id="weather-icon" src="${iconURL}" /> </div>
-    <div class="temperature-box"> ${temp}<span class="unit-measure">&#8451</span></div>
+    <div class="temperature-box"> 
+      ${temp}<span class="unit-measure">&#8451</span>
+      <div class="temp-switch-container">
+        <label class="switch">
+          <input type="checkbox" id="temp-switch">
+          <span class="slider round"></span>
+        </label>
+      </div>
+    </div>
       <ul class="weather-details">
           <li>Humidity: ${humidity} % </li>
           <li>Wind speed: ${windSpeed} Mph </li>
