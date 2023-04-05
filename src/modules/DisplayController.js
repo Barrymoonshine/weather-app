@@ -2,6 +2,18 @@ const DisplayController = (() => {
   const locationTitle = document.getElementById('location-title');
   const tempTextContainer = document.getElementById('temp-text-container');
   const weatherDetails = document.getElementById('weather-details');
+  const locationWarningMessage = document.getElementById(
+    'location-warning-message'
+  );
+  const siteSearch = document.getElementById('site-search');
+
+  const displayWarningMessage = () => {
+    locationWarningMessage.style.visibility = 'visible';
+  };
+
+  const hideWarningMessage = () => {
+    locationWarningMessage.style.visibility = 'hidden';
+  };
 
   const displayWeatherData = (
     location,
@@ -27,7 +39,11 @@ const DisplayController = (() => {
     img.src = giphURL;
   };
 
-  return { displayWeatherData, displayGiphyData };
+  siteSearch.addEventListener('click', () => {
+    hideWarningMessage();
+  });
+
+  return { displayWeatherData, displayGiphyData, displayWarningMessage };
 })();
 
 export default DisplayController;

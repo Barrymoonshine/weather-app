@@ -38,7 +38,6 @@ const AppController = (() => {
   const handleWeatherData = (data) => {
     const location = data.location.name;
     const temp = handleTempData(data);
-    console.log(`temp: ${temp}`);
     const { humidity } = data.current;
     const windSpeed = data.current.wind_mph;
     const description = data.current.condition.text;
@@ -65,6 +64,7 @@ const AppController = (() => {
       handleWeatherData(data);
     } catch (error) {
       console.log(error);
+      DisplayController.displayWarningMessage();
     }
   };
 
