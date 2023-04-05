@@ -19,12 +19,12 @@ const DisplayController = (() => {
           <li>Wind speed: ${windSpeed} Mph </li>
           <li> ${description} </li>
       </ul>
-     <div class="giphy-box><img src="#" /></div> 
+     <div class="giphy-box"><img id="giph" src="#" /></div> 
     `;
   };
 
   const displayGiphyData = (giphURL) => {
-    const img = document.querySelector('img');
+    const img = document.getElementById('giph');
     img.src = giphURL;
   };
 
