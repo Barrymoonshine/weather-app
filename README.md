@@ -2,7 +2,7 @@
 
 [Live demo](https://barrymoonshine.github.io/weather-app)
 
-![Model](https://github.com/Barrymoonshine/todo-list/blob/main/dist/images/weather-app-screenshot.png.png?raw=true)
+![Model](https://github.com/Barrymoonshine/weather-app/blob/main/dist/images/weather-app-screenshot.png.png?raw=true)
 
 ## Summary
 
