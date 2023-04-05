@@ -1,4 +1,4 @@
 import './styles/global-style.css';
 import AppController from './modules/AppController';
 
-AppController.handleWeatherRequest();
+AppController.handlePageLoad();

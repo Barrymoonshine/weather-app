@@ -3,6 +3,14 @@ import DisplayController from './DisplayController.js';
 const AppController = (() => {
   const searchLocationForm = document.getElementById('search-location-form');
   const searchfield = document.getElementById('site-search');
+  const tempSwitch = document.getElementById('temp-switch');
+  let tempMode = 'Metric';
+
+  const getCurrentLocation = () => {
+    const locationDiv = document.getElementById('location-title');
+    const currentLocation = locationDiv.textContent;
+    return currentLocation;
+  };
 
   const processGiphyData = (giphURL) => {
     const giph = giphURL.data.images.original.url;
@@ -18,9 +26,19 @@ const AppController = (() => {
     processGiphyData(giphURL);
   };
 
-  const processWeatherData = (data) => {
+  const handleTempData = (data) => {
+    if (tempMode === 'Metric') {
+      return `${data.current.temp_c}°C`;
+    }
+    if (tempMode === 'Imperial') {
+      return `${data.current.temp_f}°F`;
+    }
+  };
+
+  const handleWeatherData = (data) => {
     const location = data.location.name;
-    const temp = data.current.temp_c;
+    const temp = handleTempData(data);
+    console.log(`temp: ${temp}`);
     const { humidity } = data.current;
     const windSpeed = data.current.wind_mph;
     const description = data.current.condition.text;
@@ -44,26 +62,38 @@ const AppController = (() => {
         { mode: 'cors' }
       );
       const data = await response.json();
-      processWeatherData(data);
+      handleWeatherData(data);
     } catch (error) {
       console.log(error);
     }
   };
 
-  const handleWeatherRequest = (location) => {
-    if (location === undefined) {
-      getWeatherData('london');
-    } else getWeatherData(location);
+  const toggleTempMode = (checkboxValue) => {
+    if (checkboxValue === 'on') {
+      tempMode = 'Imperial';
+    } else {
+      tempMode = 'Metric';
+    }
+    getWeatherData(getCurrentLocation());
+  };
+
+  const handlePageLoad = () => {
+    getWeatherData('london');
   };
 
   searchLocationForm.addEventListener('submit', (e) => {
     const location = searchfield.value;
-    handleWeatherRequest(location);
+    getWeatherData(location);
     e.preventDefault();
     searchfield.value = '';
   });
 
-  return { handleWeatherRequest };
+  tempSwitch.addEventListener('change', (e) => {
+    const checkboxValue = e.target.checked ? 'on' : 'off';
+    toggleTempMode(checkboxValue);
+  });
+
+  return { handlePageLoad };
 })();
 
 export default AppController;
